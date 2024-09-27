@@ -2798,3 +2798,6 @@ def test_user_module_is_freed():
     del mod
     del opt_mod
     assert ref_mod() is None
+
+def test_trace_checker():
+    pass

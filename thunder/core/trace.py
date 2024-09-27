@@ -18,6 +18,7 @@ from thunder.core.baseutils import ProxyInterface, BoundSymbolInterface, TagBase
 import thunder.core.devices as devices
 from thunder.core.pytree import tree_flatten, tree_unflatten
 from thunder.core.codeutils import ContextObject, get_source_line, Positions
+from thunder.core.baseutils import check
 
 
 # TODO see issue "Improve TraceProvenance"
@@ -527,6 +528,17 @@ def from_trace(trace: TraceCtx) -> TraceCtx:
     t._siginfo = trace._siginfo
     return t
 
+def check_trace(trace: TraceCtx):
+    # check if all bsyms are in trace.names
+    for bsym in trace.bound_symbols:
+        check(bsym.name in trace.names, 
+        lambda: f"{bsym} not in trace.names",
+        exception_type=ValueError)
+    # # check if all bsyms are in trace.names
+    # for bsym in trace.bound_symbols:
+    #     check(bsym in trace.names, 
+    #     lambda: f"{bsym} not in trace.names",
+    #     exception_type=ValueError)
 
 #
 # Functions related to setting, getting, and resetting the current tracing context
