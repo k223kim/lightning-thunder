@@ -531,14 +531,10 @@ def from_trace(trace: TraceCtx) -> TraceCtx:
 def check_trace(trace: TraceCtx):
     # check if all bsyms are in trace.names
     for bsym in trace.bound_symbols:
-        check(bsym.name in trace.names, 
-        lambda: f"{bsym} not in trace.names",
-        exception_type=ValueError)
-    # # check if all bsyms are in trace.names
-    # for bsym in trace.bound_symbols:
-    #     check(bsym in trace.names, 
-    #     lambda: f"{bsym} not in trace.names",
-    #     exception_type=ValueError)
+        if hasattr(bsym, "output") and hasattr(bsym.output, "name"): 
+            check(bsym.output.name in trace.names, 
+            lambda: f"{bsym} not in trace.names",
+            exception_type=ValueError)
 
 #
 # Functions related to setting, getting, and resetting the current tracing context

@@ -488,9 +488,9 @@ def test_lora_transform_linear():
     assert_close(actual, expected, atol=2e-1, rtol=2e-1)
 
     # check trace
-    # check_trace(thunder.last_traces(jmodel)[-1])
-    # check_trace(thunder.last_prologue_traces(jmodel))
-    # check_trace(thunder.eplilogue_traces[-1](jmodel))
+    check_trace(thunder.last_traces(jmodel)[-1])
+    check_trace(thunder.last_prologue_traces(jmodel)[-1])
+    check_trace(thunder.eplilogue_traces[-1](jmodel))
 
     # rename tensor names
     rename_state_dict = {}
