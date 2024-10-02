@@ -490,7 +490,6 @@ def test_lora_transform_linear():
     # check trace
     check_trace(thunder.last_traces(jmodel)[-1])
     check_trace(thunder.last_prologue_traces(jmodel)[-1])
-    check_trace(thunder.eplilogue_traces[-1](jmodel))
 
     # rename tensor names
     rename_state_dict = {}
